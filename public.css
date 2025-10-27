@@ -839,6 +839,31 @@ footer {
     margin-bottom: 15px;
 }
 
+/* 成员照片样式 */
+.member-photo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #e0e0e0;
+}
+
+.photo-placeholder {
+    font-size: 3em;
+    color: #ccc;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .member-card h4 {
     color: #2c3e50;
     margin-bottom: 8px;
@@ -849,11 +874,39 @@ footer {
     color: #667eea;
     font-weight: 600;
     font-size: 0.9em;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
     background: none !important;
     border: none !important;
     padding: 0 !important;
     box-shadow: none !important;
+}
+
+.member-major {
+    color: #999;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.member-contact {
+    color: #666;
+    font-size: 0.85em;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+    background: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.contact-info {
+    color: #999;
+    font-style: italic;
 }
 
 .member-bio {
