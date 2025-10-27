@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQTP Project - Moyun-Duan</title>
+    <link rel="stylesheet" href="public.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="person.html">Person</a></li>
+            <li><a href="book.html">Book</a></li>
+            <li><a href="project.html">Project</a></li>
+            <li><a href="forum.html">Forum</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>SQTP Project</h1>
+        <p style="margin-top: 10px; font-size: 1.1em; opacity: 0.9;">Started on October 27, 2025</p>
+    </header>
+    
+    <div class="project-layout">
+        <!-- 侧边导航 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>Navigation</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#members" class="sidebar-link active">👥 Members</a></li>
+                <li><a href="#settings" class="sidebar-link">⚙️ Project Settings</a></li>
+                <li><a href="#results" class="sidebar-link">📊 Research Results</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="project.html" class="back-link">← Back to Projects</a>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="project-content">
+            <!-- 成员部分 -->
+            <section id="members" class="content-section active">
+                <h2>Team Members</h2>
+                <div class="members-grid">
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <h4>清风 (Moyun-Duan)</h4>
+                        <p class="member-role">Project Leader</p>
+                        <p class="member-bio">Passionate about innovation and research in project design.</p>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <h4>Member Name</h4>
+                        <p class="member-role">Researcher</p>
+                        <p class="member-bio">Add your team member information here.</p>
+                    </div>
+                    <div class="member-card add-member">
+                        <div class="member-avatar">➕</div>
+                        <h4>Add New Member</h4>
+                        <p class="member-role">Your team is growing!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 项目设定部分 -->
+            <section id="settings" class="content-section">
+                <h2>Project Settings</h2>
+                <div class="settings-container">
+                    <div class="setting-item">
+                        <h3>🎯 Project Goals</h3>
+                        <p>Define the main objectives and goals of the SQTP project. What are you trying to achieve?</p>
+                        <ul>
+                            <li>Research innovative solutions</li>
+                            <li>Develop cutting-edge technology</li>
+                            <li>Publish findings and results</li>
+                        </ul>
+                    </div>
+                    <div class="setting-item">
+                        <h3>📅 Timeline</h3>
+                        <p><strong>Start Date:</strong> October 27, 2025</p>
+                        <p><strong>Expected Duration:</strong> TBD</p>
+                        <p><strong>Milestones:</strong></p>
+                        <ul>
+                            <li>Phase 1: Research & Planning</li>
+                            <li>Phase 2: Development</li>
+                            <li>Phase 3: Testing & Refinement</li>
+                        </ul>
+                    </div>
+                    <div class="setting-item">
+                        <h3>🔧 Technologies</h3>
+                        <p>Tools and technologies used in this project:</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Research</span>
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="tech-tag">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 研究成果部分 -->
+            <section id="results" class="content-section">
+                <h2>Research Results</h2>
+                <div class="results-container">
+                    <div class="result-item">
+                        <div class="result-header">
+                            <h3>📄 Initial Research Phase</h3>
+                            <span class="result-date">October 2025</span>
+                        </div>
+                        <p>The project has just started! Research results and findings will be documented here as progress is made.</p>
+                    </div>
+                    <div class="result-item placeholder-result">
+                        <div class="result-header">
+                            <h3>📈 Future Results</h3>
+                            <span class="result-date">Coming Soon</span>
+                        </div>
+                        <p>Stay tuned for updates on research progress, findings, and breakthrough moments.</p>
+                    </div>
+                    <div class="no-results">
+                        <p>🔬 <strong>Research in Progress...</strong></p>
+                        <p>Check back soon for updates and findings!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 清风. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 侧边导航切换功能
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+
+                // 移除所有激活状态
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                contentSections.forEach(s => s.classList.remove('active'));
+
+                // 添加激活状态
+                link.classList.add('active');
+                document.getElementById(targetId).classList.add('active');
+
+                // 平滑滚动到顶部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
