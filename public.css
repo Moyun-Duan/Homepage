@@ -287,6 +287,201 @@ footer {
     transform: translateY(0);
 }
 
+/* 昵称输入弹窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border: none;
+}
+
+.modal-content p {
+    color: #666;
+    margin-bottom: 20px;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+#nicknameInput {
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1em;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#nicknameInput:focus {
+    border-color: #667eea;
+}
+
+#nicknameSubmit {
+    width: 100%;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#nicknameSubmit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* 论坛头部 */
+.forum-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.forum-header strong {
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.small-btn {
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.small-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.danger-btn {
+    background: rgba(231, 76, 60, 0.8);
+    border-color: rgba(231, 76, 60, 0.5);
+}
+
+.danger-btn:hover {
+    background: rgba(231, 76, 60, 1);
+}
+
+/* 留言板样式 */
+.message-board-item {
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.message-board-item:hover {
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transform: translateX(3px);
+}
+
+.message-board-item.new-message {
+    animation: messageSlide 0.3s ease;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.message-nickname {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 1em;
+}
+
+.message-time {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.message-text {
+    color: #333;
+    line-height: 1.6;
+    font-size: 1em;
+    word-wrap: break-word;
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+.welcome-message p {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     nav ul {
@@ -317,5 +512,24 @@ footer {
     
     #sendButton {
         padding: 12px 20px;
+    }
+    
+    .modal-content {
+        padding: 30px 20px;
+    }
+    
+    .forum-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .forum-header > span {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .small-btn {
+        font-size: 0.8em;
+        padding: 5px 10px;
     }
 }

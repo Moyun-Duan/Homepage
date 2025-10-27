@@ -9,25 +9,38 @@
 <body>
     <nav>
         <ul>
-            <li><a href="index.html">Main</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="person.html">Person</a></li>
             <li><a href="book.html">Book</a></li>
             <li><a href="forum.html">Forum</a></li>
         </ul>
     </nav>
     <header>
-        <h1>Forum to Talk</h1>
+        <h1>Message Board</h1>
     </header>
     <main>
-        <section class="chat-container">
-            <div class="chat-box" id="chatBox">
-                <div class="message received">
-                    <div class="message-content">
-                        <p>Welcome to the forum! Feel free to share your thoughts.</p>
-                        <span class="message-time">10:00 AM</span>
-                    </div>
-                </div>
+        <!-- 昵称输入弹窗 -->
+        <div id="nicknameModal" class="modal">
+            <div class="modal-content">
+                <h2>Welcome to the Forum!</h2>
+                <p>Please enter your nickname to continue:</p>
+                <input type="text" id="nicknameInput" placeholder="Enter your nickname..." maxlength="20" />
+                <button id="nicknameSubmit">Enter Forum</button>
             </div>
+        </div>
+
+        <!-- 留言板容器 -->
+        <section class="chat-container" id="forumContainer" style="display: none;">
+            <div class="forum-header">
+                <span>Welcome, <strong id="currentUser"></strong>!</span>
+                <button id="changeNickname" class="small-btn">Change Nickname</button>
+                <button id="clearMessages" class="small-btn danger-btn">Clear All Messages</button>
+            </div>
+            
+            <div class="chat-box" id="chatBox">
+                <!-- 留言将动态加载 -->
+            </div>
+            
             <div class="chat-input-container">
                 <input type="text" id="messageInput" placeholder="Type your message here..." />
                 <button id="sendButton">Send</button>
@@ -39,55 +52,158 @@
     </footer>
 
     <script>
+        // 全局变量
+        let currentNickname = localStorage.getItem('forumNickname') || '';
+        const nicknameModal = document.getElementById('nicknameModal');
+        const forumContainer = document.getElementById('forumContainer');
+        const nicknameInput = document.getElementById('nicknameInput');
+        const nicknameSubmit = document.getElementById('nicknameSubmit');
+        const currentUserSpan = document.getElementById('currentUser');
         const chatBox = document.getElementById('chatBox');
         const messageInput = document.getElementById('messageInput');
         const sendButton = document.getElementById('sendButton');
+        const changeNicknameBtn = document.getElementById('changeNickname');
+        const clearMessagesBtn = document.getElementById('clearMessages');
 
+        // 初始化
+        function init() {
+            if (currentNickname) {
+                showForum();
+            } else {
+                showNicknameModal();
+            }
+            loadMessages();
+        }
+
+        // 显示昵称输入弹窗
+        function showNicknameModal() {
+            nicknameModal.style.display = 'flex';
+            forumContainer.style.display = 'none';
+            nicknameInput.focus();
+        }
+
+        // 显示论坛
+        function showForum() {
+            nicknameModal.style.display = 'none';
+            forumContainer.style.display = 'block';
+            currentUserSpan.textContent = currentNickname;
+        }
+
+        // 设置昵称
+        function setNickname() {
+            const nickname = nicknameInput.value.trim();
+            if (nickname === '') {
+                alert('Please enter a nickname!');
+                return;
+            }
+            currentNickname = nickname;
+            localStorage.setItem('forumNickname', nickname);
+            nicknameInput.value = '';
+            showForum();
+        }
+
+        // 加载所有留言
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('forumMessages') || '[]');
+            chatBox.innerHTML = '';
+            
+            if (messages.length === 0) {
+                chatBox.innerHTML = `
+                    <div class="welcome-message">
+                        <p>Welcome to the message board! Be the first to leave a message.</p>
+                    </div>
+                `;
+            } else {
+                messages.forEach(msg => {
+                    addMessageToBoard(msg.nickname, msg.text, msg.time, false);
+                });
+            }
+            
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // 添加留言到页面
+        function addMessageToBoard(nickname, text, time, isNew = true) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message-board-item';
+            
+            messageDiv.innerHTML = `
+                <div class="message-header">
+                    <span class="message-nickname">${nickname}</span>
+                    <span class="message-time">${time}</span>
+                </div>
+                <div class="message-text">${text}</div>
+            `;
+            
+            if (isNew) {
+                messageDiv.classList.add('new-message');
+            }
+            
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // 发送留言
         function sendMessage() {
             const messageText = messageInput.value.trim();
             if (messageText === '') return;
 
-            // 创建发送的消息
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message sent';
-            
             const now = new Date();
-            const time = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
-            
-            messageDiv.innerHTML = `
-                <div class="message-content">
-                    <p>${messageText}</p>
-                    <span class="message-time">${time}</span>
-                </div>
-            `;
-            
-            chatBox.appendChild(messageDiv);
+            const time = now.getFullYear() + '-' + 
+                         String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                         String(now.getDate()).padStart(2, '0') + ' ' +
+                         String(now.getHours()).padStart(2, '0') + ':' + 
+                         String(now.getMinutes()).padStart(2, '0');
+
+            // 保存到 localStorage
+            const messages = JSON.parse(localStorage.getItem('forumMessages') || '[]');
+            const newMessage = {
+                nickname: currentNickname,
+                text: messageText,
+                time: time,
+                timestamp: now.getTime()
+            };
+            messages.push(newMessage);
+            localStorage.setItem('forumMessages', JSON.stringify(messages));
+
+            // 添加到页面
+            addMessageToBoard(currentNickname, messageText, time, true);
             messageInput.value = '';
-            
-            // 滚动到底部
-            chatBox.scrollTop = chatBox.scrollHeight;
-            
-            // 模拟回复（可选）
-            setTimeout(() => {
-                const replyDiv = document.createElement('div');
-                replyDiv.className = 'message received';
-                replyDiv.innerHTML = `
-                    <div class="message-content">
-                        <p>Thanks for your message! This is an auto-reply.</p>
-                        <span class="message-time">${time}</span>
-                    </div>
-                `;
-                chatBox.appendChild(replyDiv);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 1000);
         }
+
+        // 更改昵称
+        function changeNickname() {
+            if (confirm('Change your nickname? This will only affect future messages.')) {
+                currentNickname = '';
+                localStorage.removeItem('forumNickname');
+                showNicknameModal();
+            }
+        }
+
+        // 清除所有留言
+        function clearAllMessages() {
+            if (confirm('Are you sure you want to delete ALL messages? This cannot be undone!')) {
+                localStorage.removeItem('forumMessages');
+                loadMessages();
+            }
+        }
+
+        // 事件监听
+        nicknameSubmit.addEventListener('click', setNickname);
+        nicknameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') setNickname();
+        });
 
         sendButton.addEventListener('click', sendMessage);
         messageInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
+            if (e.key === 'Enter') sendMessage();
         });
+
+        changeNicknameBtn.addEventListener('click', changeNickname);
+        clearMessagesBtn.addEventListener('click', clearAllMessages);
+
+        // 页面加载时初始化
+        init();
     </script>
 </body>
 </html>
