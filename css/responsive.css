@@ -1,0 +1,93 @@
+/* ========================================
+   响应式设计 (Responsive Styles)
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 导航栏响应式 */
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    /* 页眉响应式 */
+    header h1 {
+        font-size: 2em;
+    }
+    
+    /* 主内容响应式 */
+    main > div {
+        padding: 20px;
+    }
+    
+    section h2 {
+        font-size: 1.5em;
+    }
+    
+    /* 聊天框响应式 */
+    .chat-box {
+        height: 400px;
+    }
+    
+    .message-content {
+        max-width: 85%;
+    }
+    
+    #sendButton {
+        padding: 12px 20px;
+    }
+    
+    /* 模态框响应式 */
+    .modal-content {
+        padding: 30px 20px;
+    }
+    
+    /* 论坛头部响应式 */
+    .forum-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .forum-header > span {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .small-btn {
+        font-size: 0.8em;
+        padding: 5px 10px;
+    }
+    
+    /* 项目页面响应式 */
+    .projects-container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+    
+    .project-layout {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        position: static;
+        max-height: none;
+    }
+    
+    .project-content {
+        padding: 20px;
+    }
+    
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .content-section h2 {
+        font-size: 1.6em;
+    }
+    
+    .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

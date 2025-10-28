@@ -1,0 +1,117 @@
+/* ========================================
+   全局样式 (Global Styles)
+   ======================================== */
+
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 根元素样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 背景水印 */
+body::before {
+    content: 'Be Your Best Self';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 6em;
+    font-weight: bold;
+    color: rgba(102, 126, 234, 0.08);
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+}
+
+/* 装饰性背景图案 */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 确保内容在水印之上 */
+nav, header, main, footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* 通用段落样式 */
+section p {
+    color: #444;
+    font-size: 1.1em;
+    line-height: 1.9;
+    margin-bottom: 20px;
+    text-align: justify;
+    padding: 15px 20px;
+    background: linear-gradient(to right, #f8f9fa 0%, #ffffff 100%);
+    border-left: 4px solid #667eea;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+section p:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 8px rgba(102, 126, 234, 0.15);
+    background: #ffffff;
+}
+
+section p:last-child {
+    margin-bottom: 0;
+}
+
+/* 通用链接样式 */
+section a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+section a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* 通用标题样式 */
+section h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+    animation: slideIn 0.6s ease;
+}

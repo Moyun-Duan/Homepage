@@ -9,7 +9,46 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 背景水印 */
+body::before {
+    content: 'Be Your Best Self';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 6em;
+    font-weight: bold;
+    color: rgba(102, 126, 234, 0.08);
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+}
+
+/* 装饰性背景图案 */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 确保内容在水印之上 */
+nav, header, main, footer {
+    position: relative;
+    z-index: 1;
 }
 
 /* 导航栏样式 */
@@ -69,19 +108,73 @@ main {
 }
 
 main > div {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     margin-bottom: 30px;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+main > div:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+main > div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+main > div:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
 }
 
 section h2 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 1.8em;
-    border-bottom: 3px solid #667eea;
-    padding-bottom: 10px;
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+    animation: slideIn 0.6s ease;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+    }
+    to {
+        width: 60px;
+    }
 }
 
 /* 段落样式 - 精致版本 */
