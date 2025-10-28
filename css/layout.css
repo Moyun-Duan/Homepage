@@ -2,53 +2,126 @@
    布局样式 (Layout Styles)
    ======================================== */
 
-/* 导航栏样式 */
+/* 导航栏样式 - 毛玻璃固定顶部 */
 nav {
-    background-color: #2c3e50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(44, 62, 80, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    background: rgba(44, 62, 80, 0.95);
+    padding: 10px 0;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 nav ul li a {
-    color: #ecf0f1;
+    color: #f0f4f8;
     text-decoration: none;
-    padding: 8px 20px;
-    border-radius: 5px;
+    padding: 10px 24px;
+    border-radius: 8px;
     transition: all 0.3s ease;
     font-weight: 500;
+    font-size: 1.05em;
     display: block;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+/* 导航链接下划线动画 */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
 }
 
 nav ul li a:hover {
-    background-color: #34495e;
+    background: rgba(102, 126, 234, 0.2);
     transform: translateY(-2px);
+    color: #ffffff;
+}
+
+nav ul li a:hover::after {
+    width: 80%;
 }
 
 nav ul li a:active {
     transform: translateY(0);
 }
 
-/* 页眉样式 */
+/* 页眉样式 - 增强渐变和阴影 */
 header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-align: center;
-    padding: 60px 20px;
+    padding: 120px 20px 80px;
+    margin-top: 60px; /* 为固定导航栏留空间 */
+    position: relative;
+    overflow: hidden;
+}
+
+/* 页眉装饰元素 */
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: headerRotate 30s linear infinite;
+}
+
+@keyframes headerRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+    animation: titleFadeIn 1s ease;
+}
+
+@keyframes titleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 主内容区域 */
@@ -60,31 +133,35 @@ main {
 
 main > div {
     background: rgba(255, 255, 255, 0.95);
-    margin-bottom: 30px;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.6s ease backwards;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.8s ease backwards;
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 main > div:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-main > div:nth-child(2) {
     animation-delay: 0.2s;
 }
 
-main > div:nth-child(3) {
-    animation-delay: 0.3s;
+main > div:nth-child(2) {
+    animation-delay: 0.4s;
 }
 
+main > div:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* 3D 悬停效果 */
 main > div:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+    transform: translateY(-10px) rotateX(2deg);
+    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.25);
+    border-color: rgba(102, 126, 234, 0.3);
 }
 
 /* 页脚样式 */
