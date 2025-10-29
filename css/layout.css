@@ -75,8 +75,8 @@ nav ul li a:active {
 
 /* 页眉样式 - 增强渐变和阴影 */
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--accent-gradient);
+    color: var(--text-inverse);
     text-align: center;
     padding: 120px 20px 80px;
     margin-top: 60px; /* 为固定导航栏留空间 */
@@ -132,13 +132,14 @@ main {
 }
 
 main > div {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-card);
+    color: var(--text-primary);
     margin-bottom: 40px;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-md);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--border-color);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeInUp 0.8s ease backwards;
     transform-style: preserve-3d;
@@ -160,8 +161,8 @@ main > div:nth-child(3) {
 /* 3D 悬停效果 */
 main > div:hover {
     transform: translateY(-10px) rotateX(2deg);
-    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.25);
-    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-primary);
 }
 
 /* 页脚样式 */

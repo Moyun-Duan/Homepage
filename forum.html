@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum - Moyun-Duan</title>
+    <title>Forum - Moyun-Duan | Message Board & Community</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Join the conversation! Share your thoughts, ideas, and messages on Moyun-Duan's interactive forum and message board.">
+    <meta name="keywords" content="forum, message board, community, discussion, Moyun-Duan">
+    <link rel="canonical" href="https://moyun-duan.github.io/Homepage/forum.html">
+    
     <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
@@ -13,11 +20,18 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+    
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="person.html">Person</a></li>
             <li><a href="project.html">Project</a></li>
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="forum.html">Forum</a></li>
         </ul>
     </nav>
@@ -57,6 +71,22 @@
         <p>&copy; 2025 清风. All rights reserved.</p>
     </footer>
 
+    <script>
+        // 深色模式切换
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => { themeToggle.style.transform = 'rotate(0deg)'; }, 300);
+        });
+    </script>
     <script src="js/forum.js"></script>
 </body>
 </html>

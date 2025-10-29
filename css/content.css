@@ -27,6 +27,8 @@
     border: 5px solid rgba(255, 255, 255, 0.9);
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
     transition: all 0.4s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .profile-image img:hover {
@@ -36,6 +38,9 @@
 
 /* 头像占位符（当图片加载失败时显示） */
 .profile-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -46,6 +51,12 @@
     font-size: 4em;
     color: white;
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    z-index: 1;
+}
+
+/* 当图片加载成功时，隐藏占位符 */
+.profile-image img:not([style*="display: none"]) ~ .profile-placeholder {
+    display: none;
 }
 
 /* 社交媒体链接 */
@@ -60,21 +71,21 @@
 .social-icon {
     display: inline-block;
     padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #667eea;
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
     text-decoration: none;
     border-radius: 25px;
     font-weight: 600;
     font-size: 0.95em;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .social-icon:hover {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--accent-gradient);
+    color: var(--text-inverse);
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: var(--shadow-md);
 }
 
 /* ========================================
@@ -89,13 +100,13 @@
 .skills-section {
     margin: 30px 0;
     padding: 25px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    background: var(--bg-hover);
     border-radius: 15px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid var(--accent-primary);
 }
 
 .skills-section h3 {
-    color: #667eea;
+    color: var(--accent-primary);
     font-size: 1.3em;
     margin-bottom: 15px;
     font-weight: 600;
@@ -110,21 +121,21 @@
 .skill-tag {
     display: inline-block;
     padding: 8px 18px;
-    background: white;
-    color: #667eea;
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
     border-radius: 20px;
     font-size: 0.9em;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
     cursor: default;
 }
 
 .skill-tag:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    box-shadow: var(--shadow-md);
+    background: var(--accent-gradient);
+    color: var(--text-inverse);
 }
 
 /* 兴趣领域 */
@@ -133,7 +144,7 @@
 }
 
 .interests-section h3 {
-    color: #764ba2;
+    color: var(--accent-secondary);
     font-size: 1.3em;
     margin-bottom: 15px;
     font-weight: 600;
@@ -206,7 +217,7 @@
     flex: 0 0 100px;
     text-align: center;
     font-weight: 700;
-    color: #667eea;
+    color: var(--accent-primary);
     font-size: 1.1em;
     font-family: 'Playfair Display', serif;
 }
@@ -215,9 +226,10 @@
     flex: 1;
     max-width: 45%;
     padding: 20px 25px;
-    background: white;
+    background: var(--bg-card);
+    color: var(--text-primary);
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
     position: relative;
     transition: all 0.4s ease;
 }
@@ -275,18 +287,18 @@
 
 .timeline-content:hover {
     transform: scale(1.03);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    box-shadow: var(--shadow-lg);
 }
 
 .timeline-content h4 {
-    color: #667eea;
+    color: var(--accent-primary);
     font-size: 1.2em;
     margin-bottom: 10px;
     font-weight: 600;
 }
 
 .timeline-content p {
-    color: #4a5568;
+    color: var(--text-secondary);
     line-height: 1.7;
     margin: 0;
     background: none !important;
@@ -297,12 +309,12 @@
 
 /* 时间线占位符样式 */
 .timeline-placeholder .timeline-content {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border: 2px dashed #667eea;
+    background: var(--bg-hover);
+    border: 2px dashed var(--accent-primary);
 }
 
 .timeline-placeholder h4 {
-    color: #764ba2;
+    color: var(--accent-secondary);
 }
 
 /* ========================================
@@ -338,13 +350,13 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: var(--accent-gradient);
 }
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.25);
-    border-color: #667eea;
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-primary);
 }
 
 .project-icon {
@@ -353,14 +365,14 @@
 }
 
 .project-card h3 {
-    color: #2d3748;
+    color: var(--text-primary);
     font-size: 1.4em;
     margin-bottom: 15px;
     font-weight: 700;
 }
 
 .project-description {
-    color: #4a5568;
+    color: var(--text-secondary);
     line-height: 1.7;
     margin-bottom: 20px;
     min-height: 60px;
@@ -380,8 +392,8 @@
 .tech-tag {
     display: inline-block;
     padding: 5px 12px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    color: #667eea;
+    background: var(--bg-hover);
+    color: var(--accent-primary);
     border-radius: 12px;
     font-size: 0.85em;
     font-weight: 600;
@@ -394,21 +406,21 @@
     gap: 6px;
     margin-bottom: 20px;
     padding: 12px;
-    background: rgba(102, 126, 234, 0.05);
+    background: var(--bg-hover);
     border-radius: 8px;
-    border-left: 3px solid #667eea;
+    border-left: 3px solid var(--accent-primary);
 }
 
 .meta-item {
     font-size: 0.85em;
-    color: #718096;
+    color: var(--text-muted);
     display: flex;
     align-items: center;
 }
 
 .project-link {
     display: inline-block;
-    color: #667eea;
+    color: var(--accent-primary);
     text-decoration: none;
     font-weight: 600;
     font-size: 1em;
@@ -416,7 +428,7 @@
 }
 
 .project-link:hover {
-    color: #764ba2;
+    color: var(--accent-secondary);
     transform: translateX(5px);
 }
 
@@ -432,8 +444,8 @@
 
 /* 项目占位符 */
 .project-placeholder {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-    border: 2px dashed #667eea;
+    background: var(--bg-hover);
+    border: 2px dashed var(--accent-primary);
     text-align: center;
 }
 
@@ -442,7 +454,7 @@
 }
 
 .project-placeholder h3 {
-    color: #667eea;
+    color: var(--accent-primary);
 }
 
 /* ========================================

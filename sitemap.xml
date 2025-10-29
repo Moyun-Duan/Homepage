@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://moyun-duan.github.io/Homepage/</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Person Page -->
+    <url>
+        <loc>https://moyun-duan.github.io/Homepage/person.html</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Project Page -->
+    <url>
+        <loc>https://moyun-duan.github.io/Homepage/project.html</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Forum Page -->
+    <url>
+        <loc>https://moyun-duan.github.io/Homepage/forum.html</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- SQTP Page -->
+    <url>
+        <loc>https://moyun-duan.github.io/Homepage/sqtp.html</loc>
+        <lastmod>2025-10-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+</urlset>

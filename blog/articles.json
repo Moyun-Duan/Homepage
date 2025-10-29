@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "title": "Getting Started with Web Development",
+        "excerpt": "Learn the fundamentals of web development, from HTML and CSS to modern JavaScript frameworks. A comprehensive guide for beginners starting their coding journey.",
+        "file": "1-welcome-web-dev.md",
+        "category": "tutorial",
+        "tags": ["HTML", "CSS", "JavaScript", "Beginner"],
+        "date": "2025-10-25",
+        "readTime": "5 min read",
+        "thumbnail": "💻",
+        "author": "Moyun-Duan"
+    },
+    {
+        "id": 2,
+        "title": "Dark Mode Implementation Guide",
+        "excerpt": "A comprehensive guide on implementing dark mode in your website using CSS variables and JavaScript. Learn best practices and avoid common pitfalls.",
+        "file": "2-dark-mode-guide.md",
+        "category": "programming",
+        "tags": ["CSS", "JavaScript", "UI", "UX"],
+        "date": "2025-10-26",
+        "readTime": "8 min read",
+        "thumbnail": "🌙",
+        "author": "Moyun-Duan"
+    },
+    {
+        "id": 3,
+        "title": "Design Principles for Modern Websites",
+        "excerpt": "Explore essential design principles that make websites beautiful, functional, and user-friendly. From color theory to typography excellence.",
+        "file": "3-design-principles.md",
+        "category": "design",
+        "tags": ["Design", "UI", "UX", "Best Practices"],
+        "date": "2025-10-27",
+        "readTime": "6 min read",
+        "thumbnail": "🎨",
+        "author": "Moyun-Duan"
+    },
+    {
+        "id": 4,
+        "title": "My Journey in Learning Programming",
+        "excerpt": "Reflections on my programming journey, challenges faced, and lessons learned along the way. From confusion to confidence in five years.",
+        "file": "4-programming-journey.md",
+        "category": "thoughts",
+        "tags": ["Personal", "Learning", "Career"],
+        "date": "2025-10-28",
+        "readTime": "4 min read",
+        "thumbnail": "🚀",
+        "author": "Moyun-Duan"
+    },
+    {
+        "id": 5,
+        "title": "Building Responsive Layouts with CSS Grid",
+        "excerpt": "Master CSS Grid to create flexible and responsive layouts that work on any device. Complete tutorial with real-world examples.",
+        "file": "5-css-grid-tutorial.md",
+        "category": "tutorial",
+        "tags": ["CSS", "Grid", "Responsive", "Layout"],
+        "date": "2025-10-29",
+        "readTime": "10 min read",
+        "thumbnail": "📐",
+        "author": "Moyun-Duan"
+    },
+    {
+        "id": 6,
+        "title": "The Power of Visual Effects in Web Design",
+        "excerpt": "Learn how subtle animations and visual effects can enhance user experience and engagement. From micro-interactions to page transitions.",
+        "file": "6-visual-effects.md",
+        "category": "design",
+        "tags": ["Animation", "CSS", "JavaScript", "UX"],
+        "date": "2025-10-29",
+        "readTime": "7 min read",
+        "thumbnail": "✨",
+        "author": "Moyun-Duan"
+    }
+]

@@ -3,30 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage of Moyun-Duan</title>
+    <title>Moyun-Duan | Personal Homepage - Project Designer & Enthusiastic Learner</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Welcome to Moyun-Duan's (清风) personal homepage. Project designer, enthusiastic learner, and developer. Explore my projects, thoughts, and creative works.">
+    <meta name="keywords" content="Moyun-Duan, 清风, personal homepage, project designer, portfolio, web developer, programming">
+    <meta name="author" content="Moyun-Duan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://moyun-duan.github.io/Homepage/">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moyun-duan.github.io/Homepage/">
+    <meta property="og:title" content="Moyun-Duan | Personal Homepage">
+    <meta property="og:description" content="Project Designer & Enthusiastic Learner - Explore my projects and creative works">
+    <meta property="og:image" content="https://moyun-duan.github.io/Homepage/images/profile.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Moyun-Duan | Personal Homepage">
+    <meta name="twitter:description" content="Project Designer & Enthusiastic Learner - Explore my projects and creative works">
+    <meta name="twitter:image" content="https://moyun-duan.github.io/Homepage/images/profile.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
     <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/loading.css">
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+    
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="person.html">Person</a></li>
             <li><a href="project.html">Project</a></li>
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="forum.html">Forum</a></li>
         </ul>
     </nav>
     <header>
         <div class="header-content">
-            <!-- 个人头像预留位置 -->
+            <!-- 个人头像 -->
             <div class="profile-image">
-                <img src="images/profile.jpg" alt="清风 Profile Picture" onerror="this.style.display='none'">
-                <!-- 如果没有图片，显示占位符 -->
+                <img src="images/profile.jpg" alt="清风 Profile Picture" loading="lazy" id="profileImg">
                 <div class="profile-placeholder">👤</div>
             </div>
             <h1>Welcome to the Homepage of Moyun-Duan</h1>
@@ -79,7 +111,7 @@
                     </ul>
                 </div>
                 
-                <p style="margin-top: 20px; font-style: italic; color: #667eea;">
+                <p style="margin-top: 20px; font-style: italic;" class="accent-text">
                     Feel free to explore my journey, projects, and reach out for collaboration opportunities!
                 </p>
             </div>
@@ -137,7 +169,7 @@
                     
                     <p style="margin-top: 30px; text-align: center;">
                         Want to be part of my journey? 
-                        <a href="mailto:duanmoyun0521@gmail.com" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                        <a href="mailto:duanmoyun0521@gmail.com" class="fancy-link" style="font-weight: 600; text-decoration: none;">
                             Reach out via email
                         </a> for collaboration opportunities.
                     </p>
@@ -289,7 +321,63 @@
 
     <!-- 联系表单JavaScript -->
     <script>
-        // 导航栏滚动效果
+        // ===== 深色模式切换 =====
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // 检查本地存储的主题偏好
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // 添加切换动画
+            themeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        });
+        
+        // ===== 图片懒加载（兼容旧浏览器） =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // 处理头像图片加载
+            const profileImg = document.getElementById('profileImg');
+            if (profileImg) {
+                profileImg.addEventListener('error', function() {
+                    this.style.display = 'none';
+                });
+                
+                profileImg.addEventListener('load', function() {
+                    // 图片加载成功，确保可见
+                    this.style.display = 'block';
+                });
+            }
+            
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src || img.src;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
+        });
+        
+        // ===== 导航栏滚动效果 =====
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
@@ -323,5 +411,10 @@
             // this.reset();
         });
     </script>
+    
+    <!-- SEO 和性能优化脚本 -->
+    <script src="js/seo-enhance.js"></script>
+    <script src="js/lazy-load.js"></script>
+    <script src="js/visual-effects.js"></script>
 </body>
 </html>

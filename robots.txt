@@ -1,0 +1,17 @@
+# Robots.txt for Moyun-Duan's Homepage
+# Generated: 2025-10-29
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://moyun-duan.github.io/Homepage/sitemap.xml
+
+# Disallow admin or private directories (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all CSS, JS, and images for better SEO
+Allow: /css/
+Allow: /js/
+Allow: /images/
