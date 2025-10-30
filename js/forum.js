@@ -51,23 +51,46 @@ function setNickname() {
 }
 
 // 加载所有留言
-function loadMessages() {
-    const messages = JSON.parse(localStorage.getItem('forumMessages') || '[]');
-    chatBox.innerHTML = '';
-    
-    if (messages.length === 0) {
+async function loadMessages() {
+    try {
+        const response = await fetch('/api/posts');
+        if (!response.ok) {
+            throw new Error('Failed to fetch messages.');
+        }
+        const messages = await response.json();
+        chatBox.innerHTML = '';
+
+        if (messages.length === 0) {
+            chatBox.innerHTML = `
+                <div class="welcome-message">
+                    <p>Welcome to the message board! Be the first to leave a message.</p>
+                </div>
+            `;
+        } else {
+            messages.forEach(msg => {
+                addMessageToBoard(msg.author, msg.content, msg.timestamp, false);
+            });
+        }
+    } catch (error) {
+        console.error('Error loading messages:', error);
         chatBox.innerHTML = `
             <div class="welcome-message">
-                <p>Welcome to the message board! Be the first to leave a message.</p>
+                <p>Error loading messages. Please try again later.</p>
             </div>
         `;
-    } else {
-        messages.forEach(msg => {
-            addMessageToBoard(msg.nickname, msg.text, msg.time, false);
-        });
+    } finally {
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
-    
-    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// 格式化时间戳
+function formatTimestamp(isoString) {
+    const date = new Date(isoString);
+    return date.getFullYear() + '-' +
+           String(date.getMonth() + 1).padStart(2, '0') + '-' +
+           String(date.getDate()).padStart(2, '0') + ' ' +
+           String(date.getHours()).padStart(2, '0') + ':' +
+           String(date.getMinutes()).padStart(2, '0');
 }
 
 // 添加留言到页面
@@ -75,10 +98,12 @@ function addMessageToBoard(nickname, text, time, isNew = true) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message-board-item';
     
+    const formattedTime = formatTimestamp(time);
+
     messageDiv.innerHTML = `
         <div class="message-header">
             <span class="message-nickname">${nickname}</span>
-            <span class="message-time">${time}</span>
+            <span class="message-time">${formattedTime}</span>
         </div>
         <div class="message-text">${text}</div>
     `;
@@ -87,36 +112,46 @@ function addMessageToBoard(nickname, text, time, isNew = true) {
         messageDiv.classList.add('new-message');
     }
     
+    // 如果欢迎消息存在，则先移除
+    const welcomeMessage = chatBox.querySelector('.welcome-message');
+    if (welcomeMessage) {
+        welcomeMessage.remove();
+    }
+    
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 // 发送留言
-function sendMessage() {
+async function sendMessage() {
     const messageText = messageInput.value.trim();
-    if (messageText === '') return;
+    if (messageText === '' || !currentNickname) return;
 
-    const now = new Date();
-    const time = now.getFullYear() + '-' + 
-                 String(now.getMonth() + 1).padStart(2, '0') + '-' + 
-                 String(now.getDate()).padStart(2, '0') + ' ' +
-                 String(now.getHours()).padStart(2, '0') + ':' + 
-                 String(now.getMinutes()).padStart(2, '0');
-
-    // 保存到 localStorage
-    const messages = JSON.parse(localStorage.getItem('forumMessages') || '[]');
     const newMessage = {
-        nickname: currentNickname,
-        text: messageText,
-        time: time,
-        timestamp: now.getTime()
+        author: currentNickname,
+        content: messageText,
     };
-    messages.push(newMessage);
-    localStorage.setItem('forumMessages', JSON.stringify(messages));
 
-    // 添加到页面
-    addMessageToBoard(currentNickname, messageText, time, true);
-    messageInput.value = '';
+    try {
+        const response = await fetch('/api/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newMessage),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to send message.');
+        }
+
+        const savedMessage = await response.json();
+        addMessageToBoard(savedMessage.author, savedMessage.content, savedMessage.timestamp, true);
+        messageInput.value = '';
+    } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Could not send message. Please try again.');
+    }
 }
 
 // 更改昵称
@@ -125,14 +160,6 @@ function changeNickname() {
         currentNickname = '';
         localStorage.removeItem('forumNickname');
         showNicknameModal();
-    }
-}
-
-// 清除所有留言
-function clearAllMessages() {
-    if (confirm('Are you sure you want to delete ALL messages? This cannot be undone!')) {
-        localStorage.removeItem('forumMessages');
-        loadMessages();
     }
 }
 
@@ -148,7 +175,6 @@ messageInput.addEventListener('keypress', (e) => {
 });
 
 changeNicknameBtn.addEventListener('click', changeNickname);
-clearMessagesBtn.addEventListener('click', clearAllMessages);
 
 // 页面加载时初始化
 init();
