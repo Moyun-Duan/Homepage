@@ -38,10 +38,10 @@ module.exports = async (req, res) => {
             res.status(201).json(newPost);
         } else if (req.method === 'DELETE') {
             // 从请求体中获取 ID 和作者
-            const { id, author } = req.body;
+            const { id, author, isAdmin } = req.body;
 
-            if (!id || !author) {
-                return res.status(400).json({ message: 'Post ID and author are required.' });
+            if (!id) {
+                return res.status(400).json({ message: 'Post ID is required.' });
             }
 
             const posts = await kv.get('posts') || [];
@@ -53,8 +53,8 @@ module.exports = async (req, res) => {
                 return res.status(404).json({ message: 'Post not found.' });
             }
 
-            // 安全检查：确保只有作者本人才能删除
-            if (postToDelete.author !== author) {
+            // 安全检查：管理员可以删除任何帖子，普通用户只能删除自己的帖子
+            if (!isAdmin && postToDelete.author !== author) {
                 return res.status(403).json({ message: 'Forbidden. You can only delete your own posts.' });
             }
 

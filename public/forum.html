@@ -53,8 +53,10 @@
         <section class="chat-container" id="forumContainer" style="display: none;">
             <div class="forum-header">
                 <span>Welcome, <strong id="currentUser"></strong>!</span>
-                <button id="changeNickname" class="small-btn">Change Nickname</button>
-                <button id="clearMessages" class="small-btn danger-btn">Clear All Messages</button>
+                <div>
+                    <button id="changeNickname" class="small-btn">Change Nickname</button>
+                    <button id="adminLogin" class="small-btn" onclick="window.location.href='admin.html'" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">🔐 Admin</button>
+                </div>
             </div>
             
             <div class="chat-box" id="chatBox">

@@ -11,7 +11,6 @@ const chatBox = document.getElementById('chatBox');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 const changeNicknameBtn = document.getElementById('changeNickname');
-const clearMessagesBtn = document.getElementById('clearMessages');
 
 // 初始化
 function init() {
