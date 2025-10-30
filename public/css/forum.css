@@ -168,3 +168,119 @@
     font-size: 1em;
     word-wrap: break-word;
 }
+
+/* ========================================
+   霓虹灯增强样式
+   ======================================== */
+
+/* 聊天容器霓虹效果 */
+.chat-container {
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 
+        0 0 10px var(--neon-cyan),
+        0 0 20px rgba(0, 255, 255, 0.3),
+        inset 0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+/* 论坛头部霓虹效果 */
+.forum-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-bottom: 2px solid var(--neon-pink);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.forum-header strong {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* 留言板条目霓虹效果 */
+.message-board-item {
+    background: rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--neon-cyan);
+    box-shadow: 
+        0 2px 5px rgba(0, 255, 255, 0.1),
+        -4px 0 10px rgba(0, 255, 255, 0.2);
+    transition: all 0.4s ease;
+}
+
+.message-board-item:hover {
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 255, 0.3),
+        -4px 0 20px rgba(0, 255, 255, 0.4);
+    transform: translateX(5px);
+    border-left-color: var(--neon-blue);
+}
+
+.message-nickname {
+    color: var(--neon-purple);
+    text-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+}
+
+/* 输入框霓虹效果 */
+.chat-input-container input {
+    border: 2px solid var(--neon-blue);
+    box-shadow: 
+        0 0 5px rgba(0, 243, 255, 0.2),
+        inset 0 0 5px rgba(0, 243, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.chat-input-container input:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.4),
+        inset 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* 发送按钮霓虹效果 */
+.chat-input-container button {
+    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-cyan) 100%);
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+    transition: all 0.3s ease;
+}
+
+.chat-input-container button:hover {
+    box-shadow: 
+        0 0 20px var(--neon-cyan),
+        0 0 40px rgba(0, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* 模态框霓虹效果 */
+.modal-content {
+    border: 2px solid var(--neon-purple);
+    box-shadow: 
+        0 0 30px var(--neon-purple),
+        0 0 60px rgba(139, 92, 246, 0.3),
+        inset 0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+.modal-content h2 {
+    color: var(--neon-purple);
+    text-shadow: 0 0 15px var(--neon-purple);
+}
+
+/* 删除按钮霓虹效果 */
+.delete-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    filter: grayscale(0.5);
+}
+
+.delete-btn:hover {
+    filter: grayscale(0) drop-shadow(0 0 5px var(--neon-pink));
+    transform: scale(1.2);
+}
+
+/* 欢迎消息霓虹效果 */
+.welcome-message {
+    text-align: center;
+    padding: 3rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
