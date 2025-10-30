@@ -13,12 +13,77 @@
     --neon-cyan: #00ffff;
     
     /* 发光强度 */
-    --glow-spread: 20px;
+    --glow-spread: 10px;
     --glow-blur: 30px;
     
     /* 动画时长 */
     --neon-flicker-duration: 0.5s;
     --neon-pulse-duration: 2s;
+
+    --background-color: #0a0a1a;
+    --text-color: #e0e0e0;
+    --header-color: #ffffff;
+}
+
+.background-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 12vw;
+    font-weight: 700;
+    color: rgba(200, 220, 255, 0.05);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    text-shadow: 0 0 15px rgba(100, 150, 255, 0.1);
+    user-select: none;
+    pointer-events: none;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: background-color 0.5s ease;
+}
+
+section {
+    min-height: 100vh;
+    padding: 120px 5%;
+    border-bottom: 2px solid var(--neon-blue-glow);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-size: 200% 200%;
+    animation: gradient-animation 15s ease infinite;
+}
+
+#home {
+    background: linear-gradient(-45deg, #0a0a1a, #1a0a1a, #0a1a2a, #1a1a0a);
+}
+
+#about {
+    background: linear-gradient(45deg, #0a1a2a, #1a0a1a, #0a0a1a, #2a1a0a);
+}
+
+#projects {
+    background: linear-gradient(135deg, #1a0a1a, #0a1a2a, #0a0a1a, #1a2a0a);
+}
+
+#contact {
+    background: linear-gradient(-135deg, #0a1a2a, #0a0a1a, #1a0a1a, #2a0a1a);
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* ====================================
@@ -353,6 +418,25 @@
 }
 
 /* ====================================
+   背景 logo 样式
+   ==================================== */
+
+.background-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 12vw;
+    font-weight: 700;
+    color: rgba(200, 220, 255, 0.05);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    text-shadow: 0 0 15px rgba(100, 150, 255, 0.1);
+    user-select: none;
+    pointer-events: none;
+}
+
+/* ====================================
    响应式设计
    ==================================== */
 
@@ -365,4 +449,146 @@
     .neon-card {
         padding: 1.5rem;
     }
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: background-color 0.5s ease;
+}
+
+section {
+    min-height: 100vh;
+    padding: 120px 5%;
+    border-bottom: 2px solid var(--neon-blue-glow);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-size: 200% 200%;
+    animation: gradient-animation 15s ease infinite;
+}
+
+#home {
+    background: linear-gradient(-45deg, #0a0a1a, #1a0a1a, #0a1a2a, #1a1a0a);
+}
+
+#about {
+    background: linear-gradient(45deg, #0a1a2a, #1a0a1a, #0a0a1a, #2a1a0a);
+}
+
+#projects {
+    background: linear-gradient(135deg, #1a0a1a, #0a1a2a, #0a0a1a, #1a2a0a);
+}
+
+#contact {
+    background: linear-gradient(-135deg, #0a1a2a, #0a0a1a, #1a0a1a, #2a0a1a);
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.section-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--neon-blue),
+        var(--neon-pink),
+        transparent
+    );
+    animation: title-underline 3s ease infinite;
+}
+
+@keyframes title-underline {
+    0%, 100% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+}
+
+.neon-link {
+    color: var(--neon-blue);
+    position: relative;
+    display: inline-block;
+}
+
+.neon-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--neon-blue),
+        var(--neon-pink),
+        transparent
+    );
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.neon-link:hover::after {
+    transform: scaleX(1);
+}
+
+.neon-icon {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.neon-icon:hover {
+    transform: translateY(-5px);
+}
+
+.neon-card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.neon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    z-index: 0;
+    pointer-events: none;
+}
+
+.neon-card:hover::before {
+    animation: none;
 }
